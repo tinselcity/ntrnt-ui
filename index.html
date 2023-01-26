@@ -2,27 +2,32 @@
 <html>
 <meta charset="utf-8">
 <head>
-  <title>ntrnt</title>
-  <!-- Style sheets -->
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap/5.0.2/css/bootstrap.min.css">
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="img/favicon.ico">
-  <!-- styles -->
-  <style>
-      .form-group {
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-      .table-sm {
-          font-family: monospace;
-          font-size:12px !important;
-      }
-      label {
-        display: inline-block;
-        width: 150px;
-        text-align: right;
-      }
-  </style>
+<title>ntrnt</title>
+<!-- Style sheets -->
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/5.0.2/css/bootstrap.min.css">
+<!-- Favicon -->
+<link rel="shortcut icon" href="img/favicon.ico">
+<!-- styles -->
+<style>
+  .form-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .table-sm {
+      font-family: monospace;
+      font-size:12px !important;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+  }
+  path {
+    stroke: white;
+    stroke-width: 0.25px;
+    fill: grey;
+  }
+</style>
 </head>
 <!-- ======================================================================= -->
 <!-- body... -->
@@ -44,81 +49,92 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <!-- ===================================================================== -->
-  <!-- info... -->
-  <!-- ===================================================================== -->
-  <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-  <pre>
-  </pre>
-    <div class="container-sm">
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Info Hash</label>
-      <div class="col-sm-10">
-        <input type="info_hash" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Created By</label>
-      <div class="col-sm-10">
-        <input type="created_by" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Creation Date</label>
-      <div class="col-sm-10">
-        <input type="creation_date" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Encoding</label>
-      <div class="col-sm-10">
-        <input type="encoding" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Comment</label>
-      <div class="col-sm-10">
-        <input type="comment" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
-      <div class="col-sm-10">
-        <input type="name" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Length</label>
-      <div class="col-sm-10">
-        <input type="length" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Number of Pieces</label>
-      <div class="col-sm-10">
-        <input type="num_pieces" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Piece Length</label>
-      <div class="col-sm-10">
-        <input type="piece_length" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
-      </div>
-    </div>
-    </div>
+<!-- ======================================================================= -->
+<!-- info... -->
+<!-- ======================================================================= -->
+<div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+<pre>
+</pre>
+<div class="container-sm">
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Info Hash</label>
+  <div class="col-sm-10">
+    <input type="info_hash" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
   </div>
-  <!-- ===================================================================== -->
-  <!-- trackers... -->
-  <!-- ===================================================================== -->
-  <div class="tab-pane fade" id="trackers" role="tabpanel" aria-labelledby="trackers-tab">
-    TRACKERS
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Created By</label>
+  <div class="col-sm-10">
+    <input type="created_by" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
   </div>
-  <div class="tab-pane fade" id="peers" role="tabpanel" aria-labelledby="peers-tab">
-    PEERS
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Creation Date</label>
+  <div class="col-sm-10">
+    <input type="creation_date" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
   </div>
-  <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
-    MAP
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Encoding</label>
+  <div class="col-sm-10">
+    <input type="encoding" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
   </div>
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Comment</label>
+  <div class="col-sm-10">
+    <input type="comment" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
+  <div class="col-sm-10">
+    <input type="name" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Length</label>
+  <div class="col-sm-10">
+    <input type="length" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Number of Pieces</label>
+  <div class="col-sm-10">
+    <input type="num_pieces" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Piece Length</label>
+  <div class="col-sm-10">
+    <input type="piece_length" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+  </div>
+</div>
+</div>
+</div>
+<!-- ======================================================================= -->
+<!-- trackers... -->
+<!-- ======================================================================= -->
+<div class="tab-pane fade" id="trackers" role="tabpanel" aria-labelledby="trackers-tab">
+TRACKERS
+</div>
+<!-- ======================================================================= -->
+<!-- peers... -->
+<!-- ======================================================================= -->
+<div class="tab-pane fade" id="peers" role="tabpanel" aria-labelledby="peers-tab">
+PEERS
+</div>
+<!-- ======================================================================= -->
+<!-- map... -->
+<!-- ======================================================================= -->
+<div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
+<div class="container bg-secondary mx-auto" style="border:10px solid #cecece; border-radius: 10px;">
+<div id="map" class="row">
+    <div id='amazingViz' style="height: 500px; width: 960px;">
+    </div>
+</div>
+</div>
+</div>
 </div>
 <!-- inject:js -->
 <!-- ======================================================================= -->
@@ -126,10 +142,13 @@
 <!-- ======================================================================= -->
 <script type="text/javascript" src="lib/jquery/3.6.3/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/d3/7.8.2/js/d3.min.js"></script>
+<script type="text/javascript" src="lib/topojson/3.0.2/js/topojson.min.js"></script>
 <!-- ======================================================================= -->
 <!-- Application Scripts -->
 <!-- ======================================================================= -->
 <script type="text/javascript" src="js/app.js"></script>
-<!-- endinject -->
+
+</script>
 </body>
 </html>
