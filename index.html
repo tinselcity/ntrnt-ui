@@ -27,6 +27,12 @@
     stroke-width: 0.25px;
     fill: grey;
   }
+td {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
 </head>
 <!-- ======================================================================= -->
@@ -122,7 +128,7 @@
 <table id="trackers_table" class="tablesorter table-bordered table table-striped table-sm">
   <thead class="thead">
     <tr>
-      <th>Host</th>
+      <th class="col-3">Host</th>
       <th>Completed</th>
       <th>Downloaded</th>
       <th>Incomplete</th>
@@ -152,13 +158,11 @@
 <table id="peers_table" class="tablesorter table-bordered table table-striped table-sm">
   <thead class="thead">
     <tr>
-      <th>Address</th>
-      <th>Status</th>
-      <th>From</th>
-      <th>Country</th>
-      <th>City</th>
-      <th>Lat</th>
-      <th>Lon</th>
+      <th class="col-6">Address</th>
+      <th class="col-3">Status</th>
+      <th class="col-2">From</th>
+      <th class="col-5">Country</th>
+      <th class="col-3">City</th>
     </tr>
   </thead>
   <tbody>

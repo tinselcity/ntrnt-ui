@@ -74,7 +74,7 @@ var show_trackers = function(a_data)
                 continue;
         }
         l_body.append($('<tr>').append(
-            $('<td>').text(i_obj["host"])).append(
+            $('<td class="col-3">').text(i_obj["host"])).append(
             $('<td>').text(i_obj["scrape_num_complete"])).append(
             $('<td>').text(i_obj["scrape_num_downloaded"])).append(
             $('<td>').text(i_obj["scrape_num_incomplete"])).append(
@@ -137,13 +137,11 @@ var show_peers = function(a_data)
                 continue;
         }
         l_body.append($('<tr>').append(
-            $('<td>').text(i_obj["host"])).append(
-            $('<td>').text(i_obj["status"])).append(
-            $('<td>').text(i_obj["from"])).append(
-            $('<td>').text(i_obj["geoip2_country"])).append(
-            $('<td>').text(i_obj["geoip2_city"])).append(
-            $('<td>').text(i_obj["geoip2_lat"])).append(
-            $('<td>').text(i_obj["geoip2_lon"])));
+            $('<td class="col-6">').text(i_obj["host"])).append(
+            $('<td class="col-3">').text(i_obj["status"])).append(
+            $('<td class="col-2">').text(i_obj["from"])).append(
+            $('<td class="col-5">').text(i_obj["geoip2_country"])).append(
+            $('<td class="col-3">').text(i_obj["geoip2_city"])));
     }
     // -----------------------------------------------------
     // sortable???
