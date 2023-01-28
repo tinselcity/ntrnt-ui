@@ -59,55 +59,55 @@
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Info Hash</label>
   <div class="col-sm-10">
-    <input type="info_hash" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="info_hash" class="form-control form-control-sm" id="info_hash" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Created By</label>
   <div class="col-sm-10">
-    <input type="created_by" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="created_by" class="form-control form-control-sm" id="info_created_by" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Creation Date</label>
   <div class="col-sm-10">
-    <input type="creation_date" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="creation_date" class="form-control form-control-sm" id="info_creation_date" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Encoding</label>
   <div class="col-sm-10">
-    <input type="encoding" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="encoding" class="form-control form-control-sm" id="info_encoding" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Comment</label>
   <div class="col-sm-10">
-    <input type="comment" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="comment" class="form-control form-control-sm" id="info_comment" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
   <div class="col-sm-10">
-    <input type="name" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="name" class="form-control form-control-sm" id="info_name" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Length</label>
   <div class="col-sm-10">
-    <input type="length" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="length" class="form-control form-control-sm" id="info_length" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
   <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Number of Pieces</label>
   <div class="col-sm-10">
-    <input type="num_pieces" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="num_pieces" class="form-control form-control-sm" id="info_num_pieces" placeholder="" readonly>
   </div>
 </div>
 <div class="row mb-3">
-  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Piece Length</label>
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Pieces Length</label>
   <div class="col-sm-10">
-    <input type="piece_length" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" readonly>
+    <input type="pieces_length" class="form-control form-control-sm" id="info_pieces_length" placeholder="" readonly>
   </div>
 </div>
 </div>
@@ -116,13 +116,57 @@
 <!-- trackers... -->
 <!-- ======================================================================= -->
 <div class="tab-pane fade" id="trackers" role="tabpanel" aria-labelledby="trackers-tab">
-TRACKERS
+
+<div class="row justify-content-center">
+<div class="col-auto">
+<table id="trackers_table" class="tablesorter table-bordered table table-striped table-sm">
+  <thead class="thead">
+    <tr>
+      <th>Host</th>
+      <th>Completed</th>
+      <th>Downloaded</th>
+      <th>Incomplete</th>
+      <th>Ann Num</th>
+      <th>Ann Last</th>
+      <th>Ann Next</th>
+      <th>Ann Peers</th>
+      <th>Scrape Num</th>
+      <th>Scrape Last</th>
+      <th>Scrape Next</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+</div>
+
 </div>
 <!-- ======================================================================= -->
 <!-- peers... -->
 <!-- ======================================================================= -->
 <div class="tab-pane fade" id="peers" role="tabpanel" aria-labelledby="peers-tab">
-PEERS
+
+<div class="row justify-content-center">
+<div class="col-auto">
+<table id="peers_table" class="tablesorter table-bordered table table-striped table-sm">
+  <thead class="thead">
+    <tr>
+      <th>Address</th>
+      <th>Status</th>
+      <th>From</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Lat</th>
+      <th>Lon</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+</div>
+
 </div>
 <!-- ======================================================================= -->
 <!-- map... -->
@@ -141,6 +185,7 @@ PEERS
 <!-- Libraries -->
 <!-- ======================================================================= -->
 <script type="text/javascript" src="lib/jquery/3.6.3/js/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="lib/jquery.tablesorter/2.31.3/jquery.tablesorter.combined.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/5.0.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/d3/7.8.2/js/d3.min.js"></script>
 <script type="text/javascript" src="lib/topojson/3.0.2/js/topojson.min.js"></script>
