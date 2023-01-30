@@ -27,12 +27,12 @@
     stroke-width: 0.25px;
     fill: grey;
   }
-td {
-  max-width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  td {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 </style>
 </head>
 <!-- ======================================================================= -->
@@ -124,7 +124,7 @@ td {
 <div class="tab-pane fade" id="trackers" role="tabpanel" aria-labelledby="trackers-tab">
 
 <div class="row justify-content-center">
-<div class="col-auto">
+<div class="col">
 <table id="trackers_table" class="tablesorter table-bordered table table-striped table-sm">
   <thead class="thead">
     <tr>
@@ -154,11 +154,12 @@ td {
 <div class="tab-pane fade" id="peers" role="tabpanel" aria-labelledby="peers-tab">
 
 <div class="row justify-content-center">
-<div class="col-auto">
+<div class="col">
 <table id="peers_table" class="tablesorter table-bordered table table-striped table-sm">
   <thead class="thead">
     <tr>
       <th class="col-6">Address</th>
+      <th class="col-3">Client</th>
       <th class="col-3">Status</th>
       <th class="col-2">From</th>
       <th class="col-5">Country</th>

@@ -16,22 +16,62 @@ var projection = d3.geoMercator().
     scale((width + 1) / 2 / Math.PI).
     translate([width / 2, height / 2]).
     precision(.1);
-var svg = d3.select("#map #amazingViz").append("svg")
+var g_map_svg = d3.select("#map #amazingViz").append("svg")
     .attr("width", width)
     .attr("height", height);
-var g = svg.append("g");
+var g_g = g_map_svg.append("g");
 var path = d3.geoPath().projection(projection);
 // load and display the World
 d3.json("data/topojson/world-110m2.json").then(function(topology) {
-    g.selectAll("path")
-       .data(topojson.feature(topology, topology.objects.countries).features)
-       .attr("class", "feature")
-       .enter().append("path")
-       .attr("d", path)
-       .style("fill", "#EEEEEE")
-       .style("stroke", "#BDBDBD")
-       .style("stroke-width", "0.5");       
+    g_g.selectAll("path")
+        .data(topojson.feature(topology, topology.objects.countries).features)
+        .attr("class", "feature")
+        .enter().append("path")
+        .attr("d", path)
+        .style("fill", "#EEEEEE")
+        .style("stroke", "#BDBDBD")
+        .style("stroke-width", "0.5");
 });
+// -------------------------------------------------------------------
+//
+// -------------------------------------------------------------------
+var draw_ips_on_map = function() {
+    var data = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-111.6782379150,39.32373809814]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-74.00714111328,40.71455001831]
+            }
+        }]};
+
+    // -----------------------------------------------------
+    // draw dots
+    // -----------------------------------------------------
+    d3.selectAll("#bonkers").remove();
+    var g = g_map_svg.append("g").attr("id","bonkers");
+
+    g.selectAll('.tweets')
+        .append("svg:circle")
+        .data(data.features)
+        .enter()
+        .append('path')
+        .style("fill", "red")
+        .style("opacity", "0.7")
+        .attr("r", 0)
+        .attr('d',path)
+        .attr('class', 'tweets');
+}
+draw_ips_on_map();
 //! ----------------------------------------------------------------------------
 //! show_info
 //! ----------------------------------------------------------------------------
@@ -127,17 +167,12 @@ var show_peers = function(a_data)
     var l_peers = a_data["peers"];
     for (var i = 0; i < l_peers.length; i++) {
         var i_obj = l_peers[i];
-        if (i_obj["status"] == "NONE") {
-                continue;
-        }
-        if (i_obj["status"] == "DEAD") {
-                continue;
-        }
-        if (!i_obj["host"]) {
+        if (i_obj["status"] != "CONNECTED") {
                 continue;
         }
         l_body.append($('<tr>').append(
             $('<td class="col-6">').text(i_obj["host"])).append(
+            $('<td class="col-3">').text(i_obj["client"])).append(
             $('<td class="col-3">').text(i_obj["status"])).append(
             $('<td class="col-2">').text(i_obj["from"])).append(
             $('<td class="col-5">').text(i_obj["geoip2_country"])).append(
@@ -146,7 +181,6 @@ var show_peers = function(a_data)
     // -----------------------------------------------------
     // sortable???
     // -----------------------------------------------------
-/*
     $(function() {
       $("table").tablesorter({
         theme : "bootstrap",
@@ -160,7 +194,6 @@ var show_peers = function(a_data)
         }
       })
     });
-*/
 }
 //! ----------------------------------------------------------------------------
 //! load_peers
@@ -176,6 +209,7 @@ var load_peers = function() {
 //! ----------------------------------------------------------------------------
 var show_map = function(a_data)
 {
+/*
     d3.selectAll("#bonkers").remove();
     var g = g_map_svg.append("g").attr("id","bonkers");
     if (a_data) {
@@ -241,6 +275,7 @@ var show_map = function(a_data)
             });
     }
     resizeMap();
+    */
 }
 //! ----------------------------------------------------------------------------
 //! load_map
@@ -274,7 +309,7 @@ var load_view = function() {
 //! ----------------------------------------------------------------------------
 var refresh_view = function() {
     load_view();
-    setTimeout(refresh_view, 1000);
+    setTimeout(refresh_view, 5000);
 };
 //! ----------------------------------------------------------------------------
 //! main
@@ -288,3 +323,11 @@ var main = function() {
 $(document).ready(function() {
     main();
 } );
+//! ----------------------------------------------------------------------------
+//! tab on click
+//! ----------------------------------------------------------------------------
+$(document).ready(function(){
+  $('#myTab').click(function (link) {
+    load_view();
+  })
+});
