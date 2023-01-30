@@ -5,8 +5,6 @@ var g_host = "http://127.0.0.1:12346";
 //! ----------------------------------------------------------------------------
 //! world map
 //! ----------------------------------------------------------------------------
-//console.log('height: ' + $("#amazingViz").height());
-//console.log('width: ' + $("#amazingViz").width());
 var width = $("#map #amazingViz").width(); //scope.width || 300;
 var height = $("#map #amazingViz").height(); //scope.height || 1020;
 var scale = 1; //scope.scale || 1;
@@ -32,46 +30,6 @@ d3.json("data/topojson/world-110m2.json").then(function(topology) {
         .style("stroke", "#BDBDBD")
         .style("stroke-width", "0.5");
 });
-// -------------------------------------------------------------------
-//
-// -------------------------------------------------------------------
-var draw_ips_on_map = function() {
-    var data = {
-      "type": "FeatureCollection",
-      "features": [
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [-111.6782379150,39.32373809814]
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [-74.00714111328,40.71455001831]
-            }
-        }]};
-
-    // -----------------------------------------------------
-    // draw dots
-    // -----------------------------------------------------
-    d3.selectAll("#bonkers").remove();
-    var g = g_map_svg.append("g").attr("id","bonkers");
-
-    g.selectAll('.tweets')
-        .append("svg:circle")
-        .data(data.features)
-        .enter()
-        .append('path')
-        .style("fill", "red")
-        .style("opacity", "0.7")
-        .attr("r", 0)
-        .attr('d',path)
-        .attr('class', 'tweets');
-}
-draw_ips_on_map();
 //! ----------------------------------------------------------------------------
 //! show_info
 //! ----------------------------------------------------------------------------
@@ -126,24 +84,18 @@ var show_trackers = function(a_data)
             $('<td>').text(i_obj["scrape_last_s"])).append(
             $('<td>').text(i_obj["scrape_next_s"])));
     }
+    l_body.trigger('update');
     // -----------------------------------------------------
     // sortable???
     // -----------------------------------------------------
-/*
     $(function() {
-      $("table").tablesorter({
+      $("#trackers_table").tablesorter({
         theme : "bootstrap",
         sortInitialOrder: "desc",
         // sort on the first column and second column in ascending order
-        sortList: [[1,1]],
-        widgets : [ "columns", "zebra" ],
-        widgetOptions : {
-          zebra : ["even", "odd"],
-          columns: [ "primary", "secondary", "tertiary" ],
-        }
+        sortList: [[4,1]]
       })
     });
-*/
 }
 //! ----------------------------------------------------------------------------
 //! load_trackers
@@ -160,38 +112,37 @@ var load_trackers = function() {
 var show_peers = function(a_data)
 {
     // -----------------------------------------------------
-    // trackers
+    // peers
     // -----------------------------------------------------
     $("#peers_table tbody tr").remove();
     var l_body = $("#peers_table").find('tbody');
     var l_peers = a_data["peers"];
     for (var i = 0; i < l_peers.length; i++) {
         var i_obj = l_peers[i];
-        if (i_obj["status"] != "CONNECTED") {
+        if (i_obj["status"] == "NONE") {
                 continue;
         }
         l_body.append($('<tr>').append(
-            $('<td class="col-6">').text(i_obj["host"])).append(
+            $('<td class="col-5">').text(i_obj["host"])).append(
             $('<td class="col-3">').text(i_obj["client"])).append(
-            $('<td class="col-3">').text(i_obj["status"])).append(
             $('<td class="col-2">').text(i_obj["from"])).append(
-            $('<td class="col-5">').text(i_obj["geoip2_country"])).append(
-            $('<td class="col-3">').text(i_obj["geoip2_city"])));
+            $('<td class="col-3">').text(i_obj["status"])).append(
+            $('<td class="col-3">').text(i_obj["recvd"])).append(
+            $('<td class="col-3">').text(i_obj["recvd_per_s"])).append(
+            $('<td class="col-3">').text(i_obj["sent"])).append(
+            $('<td class="col-3">').text(i_obj["sent_per_s"])).append(
+            $('<td class="col-2">').text(i_obj["error"])));
     }
+    l_body.trigger('update');
     // -----------------------------------------------------
     // sortable???
     // -----------------------------------------------------
     $(function() {
-      $("table").tablesorter({
+      $("#peers_table").tablesorter({
         theme : "bootstrap",
         sortInitialOrder: "desc",
         // sort on the first column and second column in ascending order
-        sortList: [[1,1]],
-        widgets : [ "columns", "zebra" ],
-        widgetOptions : {
-          zebra : ["even", "odd"],
-          columns: [ "primary", "secondary", "tertiary" ],
-        }
+        sortList: [[4,1]]
       })
     });
 }
@@ -276,6 +227,85 @@ var show_map = function(a_data)
     }
     resizeMap();
     */
+
+    // -----------------------------------------------------
+    // data dict
+    // -----------------------------------------------------
+    var l_data_active = {
+      "type": "FeatureCollection",
+      "features": []
+    };
+    var l_data_dead = {
+      "type": "FeatureCollection",
+      "features": []
+    };
+    // -----------------------------------------------------
+    // peers
+    // -----------------------------------------------------
+    var l_peers = a_data["peers"];
+    for (var i = 0; i < l_peers.length; i++) {
+        var i_obj = l_peers[i];
+        if (i_obj["status"] == "NONE") {
+                continue;
+        }
+        l_f = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [i_obj["geoip2_lon"], i_obj["geoip2_lat"]]
+            }
+        }
+        if (i_obj["status"] == "CONNECTED") {
+            l_data_active["features"].push(l_f);
+        }
+        else {
+            l_data_dead["features"].push(l_f);
+        }
+    }
+    /*
+    var data = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-111.6782379150,39.32373809814]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-74.00714111328,40.71455001831]
+            }
+        }]};
+    */
+    // -----------------------------------------------------
+    // draw dots
+    // -----------------------------------------------------
+    d3.selectAll("#bonkers").remove();
+    var g = g_map_svg.append("g").attr("id","bonkers");
+    g.selectAll('.peers_dead')
+        .append("svg:circle")
+        .data(l_data_dead.features)
+        .enter()
+        .append('path')
+        .style("fill", "gray")
+        .style("opacity", "0.4")
+        .attr("r", 0)
+        .attr('d',path)
+        .attr('class', 'peers_dead');
+    g.selectAll('.peers_active')
+        .append("svg:circle")
+        .data(l_data_active.features)
+        .enter()
+        .append('path')
+        .style("fill", "red")
+        .style("opacity", "0.9")
+        .attr("r", 0)
+        .attr('d',path)
+        .attr('class', 'peers_active');
 }
 //! ----------------------------------------------------------------------------
 //! load_map
@@ -302,6 +332,7 @@ var load_view = function() {
     }
     else if(l_tab_id == "map-tab") {
         load_map();
+        setTimeout(refresh_view, 1000);
     }
 }
 //! ----------------------------------------------------------------------------
@@ -309,13 +340,12 @@ var load_view = function() {
 //! ----------------------------------------------------------------------------
 var refresh_view = function() {
     load_view();
-    setTimeout(refresh_view, 5000);
 };
 //! ----------------------------------------------------------------------------
 //! main
 //! ----------------------------------------------------------------------------
 var main = function() {
-    refresh_view();
+    //refresh_view();
 };
 //! ----------------------------------------------------------------------------
 //! start
