@@ -160,74 +160,6 @@ var load_peers = function() {
 //! ----------------------------------------------------------------------------
 var show_map = function(a_data)
 {
-/*
-    d3.selectAll("#bonkers").remove();
-    var g = g_map_svg.append("g").attr("id","bonkers");
-    if (a_data) {
-        var radius = a_data[0].count;
-        var elem = g.selectAll("g").data(a_data);
-        var elemEnter = elem.enter()
-            .append("g")
-            .attr("transform", function(d) {
-                var coord = projection(d.coordinates);
-                return "translate("+ coord.join(",")+")";
-
-            });
-        elemEnter
-            .append("svg:circle")
-            .attr("r", 0)
-            .style("fill", function(d) {
-                var l_scaled_amount = (d.count / a_total);
-                var l_color = 255 - Math.round(l_scaled_amount*500.0*255);
-                return "rgb("
-                + "255" + ","
-                + l_color + ","
-                + l_color + ")";
-            })
-            .style("stroke", "rgba(200, 50, 50, 0.75)")
-            .style("fill-opacity", "0.30")
-            .on('mousedown', function(d) {
-                add_filter('virt_remote_host', d.src_ip);
-            })
-            .on("mouseover", function(d) {
-                d3.select(this)
-                .attr("r", function(d) {
-                    return get_radius(d.count, a_total, 1.5)
-                })
-                .style("fill-opacity", "0.60")
-                .style("stroke", "rgba(60, 70, 60, 10.0)")
-                ;
-                tooltip
-                    .style("visibility", "visible")
-                    .html(
-                        "<b>" +
-                        d.src_ip.toUpperCase() +
-                        "</b>" +
-                        ": " + Math.round((d.count)) + " Alerts: " +
-                        (100.0*(d.count / a_total)).toFixed(2) + "%"
-                        );
-            })
-            .on("mouseout", function(d) {
-                    d3.select(this)
-                    .attr("r", function(d) {
-                        return get_radius(d.count, a_total, 1.0)
-                    })
-                    .style("stroke", "rgba(200, 50, 50, 0.75)")
-                    .style("fill-opacity", "0.30")
-                    ;
-                tooltip
-                    .style("visibility", "hidden");
-            })
-            .transition()
-            .duration(1000)
-            .delay(function(d, i) {return i * 10;})
-            .attr("r", function(d) {
-                return get_radius(d.count, a_total, 1.0)
-            });
-    }
-    resizeMap();
-    */
-
     // -----------------------------------------------------
     // data dict
     // -----------------------------------------------------
@@ -262,25 +194,6 @@ var show_map = function(a_data)
             l_data_dead["features"].push(l_f);
         }
     }
-    /*
-    var data = {
-      "type": "FeatureCollection",
-      "features": [
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [-111.6782379150,39.32373809814]
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [-74.00714111328,40.71455001831]
-            }
-        }]};
-    */
     // -----------------------------------------------------
     // draw dots
     // -----------------------------------------------------
